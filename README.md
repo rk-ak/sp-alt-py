@@ -11,4 +11,4 @@ Solution:
 
 	Alteryx workflow steps and python script are provided in-detail in a separate file.
 	
-	Alteryx general tips provided in another file.
+	Alteryx general tips is provided in another file.
