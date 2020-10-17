@@ -8,3 +8,5 @@ Requirement:
 
 Solution:
 	There are two ways to use python script within Alteryx. If we have Alteryx version 2018.3 and above, we can use “Python” tool directly within Alteryx to run python scripts. For earlier versions of Alteryx, we can use “Run Command” tool to call the Python program to run python scripts. For older version of Alteryx, so can use the second approach. However, its applicable for latest versions of Alteryx as well. Additionally, for this to work we should have basic Python modules (Anaconda Python 3 is recommended) already installed.
+
+	Alteryx workflow steps and python script is provided in-detail in a seperate file.
