@@ -1,0 +1,69 @@
+In Alteryx Workflow:
+
+	“Run Command” tool is available under Developer menu in Alteryx. Select it and drag and drop it onto canvas in Alteryx workflow.
+
+  After selecting the tool on the canvas, we can see the configuration window where we can setup as fields as per below screenshot. 
+  
+  Note: if there are any blank spaces in the file name or file paths then its recommended to enclose them using double quotes(“).
+
+  o	First field “Output” can be used if we need to give a input data file to python script.  
+  o	Select the python.exe file using “Browse” button next to “Command” field which will automatically enter the full folder and file path of python.exe.
+  o	In the “Command Arguments” field enter the name of python script file (.py extension), followed by any input parameters.
+  o	In the “Working Directory” field select the folder path which has the above python script file, using the “Browse” button.
+  o	Using the “Input” button at the bottom, select the data file which is output from the python script and will be used later in the Alteryx workflow.
+  
+  Then, we need to connect the output from python scrip to “Output Data” tool available under “In/Out” menu in Alteryx.
+  
+In Python Script:
+
+  Before importing python modules into the script, we can install them first using “pip install” command. 
+  
+  Then we can import the required python modules in the python script and connect to sharepoint and extract the list data into an output file. 
+  
+  We are also calculating the runtime of this python script.
+  
+  Below is a simple python script template which is used in above screenshot to extract data from sharepoint list. 
+
+  In the python script each block of steps is preceded with a comment line to understand what it does. 
+  
+  Note that there are several other python modules or data structures available which can also be used to do this task.
+
+------
+# import required modules to connect to sharepoint, get password, check run time
+import shareplum # for sharepoint connection
+from shareplum import Site # for sharepoint list
+from requests_ntlm import HttpNtlmAuth # for user authentication
+import getpass # get sharepoint login password
+from datetime import datetime # check run time
+
+# username
+un = "xxxxxxx"
+# password
+pwd = getpass.getpass("Password: ")
+
+# start timer
+t1 = datetime.now()
+
+	# setup sharepoint list connection
+cred = HttpNtlmAuth(un, pwd)
+site = Site('Sharepoint site list full path goes here’, auth=cred)
+sp_list = site.List(‘Sharepoint list name goes here’)
+list_data = sp_list.GetListItems()
+	
+	# end timer
+t2 = datetime.now()
+
+# to check run time of sharepoint data extraction
+#print("Run Time:", t2-t1, "secs")
+
+# convert SP list data to pandas dataframe and export to a csv file.
+import pandas as pd
+df = pd.DataFrame(list_data)
+df.to_csv("Output file full path from python script goes here")
+------
+
+Conclusion:
+
+	Using the above approach of running python script inside the Alteryx workflow, we were able to achieve faster run time for sharepoint list data extraction.
+  
+  On average the runtime was reduced 10X times than earlier. We also never encounter any disconnection issues with this approach.
