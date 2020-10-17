@@ -1,0 +1,11 @@
+Alteryx - General Tips:
+
+1. Use select tool to use only the required fields. It will save a lot of execution time. It can also be used to change data type and rename field.
+2. Use formula tool instead of other calculation or action tools, as formula tools is super fast compared to other tools eg: impute tool. One formula tool can contain multiple formulas.
+    It can be used to change existing field or to create a new field. Although data type of existing field cannot be changed using the formula tool.
+3. Use .csv file exports or imports instead of excel files, as they execute faster than the excel files.
+4. Use command tool to execute other programs in Alteryx workflow, like python.
+5. Use unique tool if you suspect that the input data source might contain duplicate records.
+6. Use the correct join tool for combining two input data sources, as each kind of join tool is specifically designed to perform an unique task.
+7. Use tool container to segregate the workflow into manageable sections. Color of a tool container can also be changed as required.
+8. Use native file exports as requried as it saves a lot of file format conversion time, eg: tde or hyper files exports for tableau dashboards.
